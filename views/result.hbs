@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="text-left">
+        <img src="" width="100px" />
+    </div>
+    <div class="text-center">
+        <h1 class="text-dark">{{test}}</h1>
+        <h1 class="text-dark">{{ student.name }}</h1>
+    </div>
+    <div class="row border border-info py-3 rounded">
+        <div class="col-sm-6 border-right">
+            <h2 class="text-center text-dark">Total score</h2>
+            <hr>
+            <h1 class="display-1 text-center font-weight-bold">{{total}}</h1>
+        </div>
+        <div class="col-sm-6 h-100">
+            <br>
+            <div class="h-100">
+                <div sytle="line-height:1.5;display:inline-block;vertical-align:middle">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 class="text-center text-dark">English</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <h1 class="text-center">{{english}}</h1>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 class="text-center text-dark">Math</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <h1 class="text-center">{{mathscore}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
+        <h1 class="text-center text-success">Sub Score</h1>
+        <div class="row border border-dark rounded">
+            <div class="col-sm-3 border-right my-2">
+                <h1 class="text-center text-dark">Reading</h1>
+                <hr>
+                <h1 class="text-center display-4">{{readingscore}}</h1>
+            </div>
+            <div class="col-sm-3 border-right my-2">
+                <h1 class="text-center text-dark">Writing</h1>
+                <hr>
+                <h1 class="text-center display-4 text-danger">{{writingscore}}</h1>
+            </div>
+            <div class="col-sm-6 my-2">
+                <h1 class="text-center text-dark">Math</h1>
+                <hr>
+                <h1 class="text-center display-4" style="color:#9ACD32">{{mathscore}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row border border-dark rounded mt-2">
+        <div class="col-sm-3 border-right my-2">
+            <p class="text-center font-weight-bold" style="font-size:150%">Reading</p>
+            <h1 class="text-center display-4">{{readingw}}/
+                <span style="font-size:40%" class="text-dark font-weight-bold">52</span>
+            </h1>
+        </div>
+        <div class="col-sm-3 border-right my-2">
+            <p class="text-center font-weight-bold" style="font-size:150%">Writing</p>
+            <h1 class="text-center display-4 text-danger">{{writingw}}/
+                <span style="font-size:40%" class="text-dark font-weight-bold">44</span>
+            </h1>
+        </div>
+        <div class="col-sm-3 border-right my-2">
+            <p class="text-center font-weight-bold" style="font-size:150%">Math w/o Cal</p>
+            <h1 class="text-center display-4" style="color:#CCCC00">{{mathnocw}}/
+                <span style="font-size:40%" class="text-dark font-weight-bold">20</span>
+            </h1>
+        </div>
+        <div class="col-sm-3 border-right my-2">
+            <p class="text-center font-weight-bold" style="font-size:150%">Math w Cal</p>
+            <h1 class="text-center display-4" style="color:#9ACD32">{{mathwicw}}/
+                <span style="font-size:40%" class="text-dark font-weight-bold">38</span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <h2 class="text-center text-info mt-5">C/W
+            <p class="float-right lead d-inline">Graded By {{gradedBy}}</p>
+        </h2>
+        <div class="row mb-5">
+            {{{resultOut submitted}}}
+        </div>
+    </div>
+</div>
+<form action="/grading/student/{{student.id}}/send" method="post">
+    <div class="container">
+        <div style="display:none">
+            <input type="hidden" value="{{total}}" name="total">
+            <input type="hidden" value="{{readingscore}}" name="r">
+            <input type="hidden" value="{{writingscore}}" name="w">
+            <input type="hidden" value="{{mathscore}}" name="m">
+            <input type="hidden" value="{{nw}}" name="mathnocw">
+            <input type="hidden" value="{{cw}}" name="mathwicw">
+            <input type="hidden" value="{{rw}}" name="readingw">
+            <input type="hidden" value="{{ww}}" name="writingw">
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <button class="btn btn-outline-success float-right">Send Email</button>
+
+        {{#if submitted}} {{{submit submitted}}} {{/if}}
+    </div>
+</form>

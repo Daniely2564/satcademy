@@ -1,0 +1,110 @@
+<style>
+    input {
+        width: 24%;
+    }
+
+    .line {
+        float: left;
+        width: 25%;
+    }
+
+    .tables {
+        border-top: 1px solid #3b3b3b70;
+    }
+</style>
+
+<div class="container">
+    <div class="col-lg-12 ml-5">
+        <div class="starter-template ml-5">
+            <form method="POST">
+                <h1>Grade Your Test</h1>
+                {{#if errors}}
+                <div class="alert alert-danger">{{errors}}</div>
+                {{/if}}
+                <p class="lead">
+                    <label for="test">Test # : </label>
+                    <select name="test" id="test" class="w-25 form-control d-inline">
+                        <option></option>
+                        <option value="cb3">College Board 3</option>
+                        <option value="cb4">College Board 4</option>
+                        <option value="cb5">College Board 5</option>
+                        <option value="cb6">College Board 6</option>
+                        <option value="cb7">College Board 7</option>
+                        <option value="cb8">College Board 8</option>
+                    </select>
+                    <br>
+                    <label for="stdname">Student Name : </label>
+                    {{#if student}}
+                    <input type="text" name="stdname" value="{{student.name}}" disabled> {{else}}
+                    <input type="text" name="stdname" value="No Student" disabled> {{/if}}
+                    <input type="hidden" name="gradedBy" value={{user.name}}>
+                    <input type="hidden" value="{{student._id}}">
+                </p>
+
+
+                <br>
+
+                <div class="row">
+                    <h1>Reading</h1>
+                </div>
+                <div class="row">
+                    <table class="reading tables">
+                        <tr>
+                            <td>
+                                <label></label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <h1>Writing</h1>
+                </div>
+                <div class="row">
+                    <table class="writing tables">
+
+                    </table>
+                </div>
+                <div class="row">
+                    <h1>Math 1</h1>
+                </div>
+                <div class="row">
+                    <table class="mathnoc tables">
+
+                    </table>
+                </div>
+                <div class="row">
+                    <h1>Math 2</h1>
+                </div>
+                <div class="row">
+                    <table class="mathwic tables">
+
+                    </table>
+                </div>
+                <div class="alert alert-danger" id="error" style="display:none"></div>
+                <div class="row">
+                    <input type="submit" name="submit" class="btn btn-primary form-control mt-2" style="width: 50%;margin: 10px auto" id="submit">
+                </div>
+            </form>
+
+            <script src="/js/script.js"></script>
+            <script>
+                window.onload = () => {
+                    let submit = document.getElementById('submit');
+                    let test = document.getElementById('test');
+                    submit.addEventListener('click', function (event) {
+                        if (test.value === '' || test.value === null) {
+                            event.preventDefault();
+                            document.getElementById("error").innerHTML = "Please Enter the Name of the Test";
+                            document.getElementById("error").removeAttribute("style");
+                            document.getElementById("error").setAttribute("style", "display:block");
+                        }
+                    })
+                }
+            </script>
+        </div>
+    </div>
+</div>

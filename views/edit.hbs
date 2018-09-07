@@ -1,0 +1,402 @@
+<div class="container">
+    <h1 class="text-center mt-5">Student Profile</h1>
+    <p class="lead text-center">View {{student.name}}'s Profile</p>
+    <input type="hidden" name="id" value="{{student._id}}">
+    <form method="post">
+        {{!-- First row --}}
+        <div class="row">
+            {{!-- first column --}}
+            <div class="col-md-6 col-lg-6">
+                <div class="mt-2 border h-100">
+                    <h4 class="text-info text-center mt-2">Student Information</h4>
+                    <div class="form-group row mt-5 mb-0">
+                        <label for="name" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Category:</p>
+                        </label>
+                        <input type="text" name="category" class="form-control col-md-8 h-25" value="{{student.category}}" id="category">
+                    </div>
+                    <div class="form-group row mt-5 mb-0">
+                        <label for="name" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Name:</p>
+                        </label>
+                        <input type="text" name="name" class="form-control col-md-8 h-25" value="{{student.name}}" id="name">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="birthday" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Birthday:</p>
+                        </label>
+                        <input type="date" name="birthday" class="form-control col-md-8 h-25" value="{{student.birthday}}" id="birthday">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="address" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Address:</p>
+                        </label>
+                        <input type="text" name="address" class="form-control col-md-8 h-25" value="{{student.address}}" id="address">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="email" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Email:</p>
+                        </label>
+                        <input type="email" name="email" class="form-control col-md-8 h-25" value="{{student.email}}" id="email">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="homephone" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Home Tel:</p>
+                        </label>
+                        <input type="text" name="homephone" class="form-control col-md-8 h-25" value="{{student.homephone}}" id="homephone">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="phone" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Cellular:</p>
+                        </label>
+                        <input type="text" name="phone" class="form-control col-md-8 h-25" value="{{student.phone}}" id="phone">
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <label for="enrolled" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Enrolled:</p>
+                        </label>
+                        <input type="date" name="enrolledDate" class="form-control col-md-8 h-25" value="{{student.enrolledDate}}" id="enrolled">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="startDate" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Start D:</p>
+                        </label>
+                        <input type="date" name="startDate" class="form-control col-md-8 h-25" value="{{student.startDate}}" id="startDate">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="endDate" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">End D:</p>
+                        </label>
+                        <input type="date" name="endDate" class="form-control col-md-8 h-25" value="{{student.endDate}}" id="endDate">
+                    </div>
+                    <div class="ml-5 row">
+                        <label for="week" class="lead font-weight-bold">Weeks : </label>
+                        <div class="ml-2 col-md-9">
+                            <input class="form-control" name="week" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Second column --}}
+            <div class="col-md-6 col-lg-6">
+                <div class="mt-2 border">
+                    <h4 class="text-info text-center mt-2">Parent Information</h4>
+                    <div class="form-group row mt-5 mb-0">
+                        <label for="parentName" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Name:</p>
+                        </label>
+                        <input type="text" name="parentName" class="form-control col-md-8 h-25" placeholder="Parent Name" value="{{student.parentName}}"
+                            id="parentName">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="parentEmail" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Email:</p>
+                        </label>
+                        <input type="email" name="parentEmail" class="form-control col-md-8 h-25" placeholder="parent@email.com" value="{{student.parentEmail}}"
+                            id="parentEmail">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="parentCellular" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Cellular:</p>
+                        </label>
+                        <input type="text" name="parentPhone" class="form-control col-md-8 h-25" placeholder="###-###-####" value="{{student.parentPhone}}"
+                            id="parentPhone ">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="officeTel" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Office Tel:</p>
+                        </label>
+                        <input type="text" name="parentOfficeTel" class="form-control col-md-8 h-25" placeholder="###-###-####" value="{{student.parentOfficeTel}}"
+                            id="officeTel">
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label class="col-md-12 text-center font-weight-bold">
+                            <h5 class="text-danger">Emergency Contact</h5>
+                        </label>
+                        <label for="emergencyName" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Name:</p>
+                        </label>
+                        <input type="text" name="emergencyName" class="form-control col-md-8 h-25" value="{{student.emergencyName}}" placeholder="Name"
+                            id="emergencyName">
+                        <label for="emergencyPhone" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Phone:</p>
+                        </label>
+                        <input type="text" name="emergencyPhone" class="form-control col-md-8 h-25" placeholder="###-###-####" value="{{student.emergencyPhone}}"
+                            id="emergencyPhone">
+                    </div>
+                </div>
+                <div class="mt-2 border">
+                    <h5 class="text-center text-info">How did you hear about SATCADEMY</h5>
+                    <div class="text-center">
+                        {{{referral student}}}
+                    </div>
+                    <div class="row">
+                        <label for="referralName" class="col-md-3">
+                            <p class="lead font-weight-bold text-right">Referral By</p>
+                        </label>
+                        <input type="text" name="referralName" class="form-control col-md-8 h-25" placeholder="Referral Name" value="{{student.referralName}}"
+                            id="referralName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {{!-- Second row --}}
+            <div class="col-md-12 col-lg-12">
+                <div class="border mt-3">
+                    <h4 class="text-center text-info mt-2">Academic Information</h4>
+                    <br>
+                    <label for="schoolName">
+                        <p class="lead font-weight-bold text-right" style="text-indent:15px">1. Current school name:
+                            <input type="text" value="{{student.school}}" class="border-bottom noborder text-center" style="border:none" name="school">
+                            <span class="w-25">Grade:
+                                <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.grade}}" name="grade">
+                            </span>
+                        </p>
+                    </label>
+                    <label for="schoolName">
+                        <p class="lead font-weight-bold text-right" style="text-indent:15px">2. How long in the USA?
+                            <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.yearsInUSA}}" name="yearsInUSA">Years</p>
+                    </label>
+                    <label class="w-100">
+                        <p class="lead font-weight-bold" style="text-indent:15px">3. List of Current Subjects
+                            <div class="ml-4">
+                                <div class="row">
+                                    <div class="col-md-3 ">English</span>
+                                        <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.currentEnglish}}" name="currentEnglish">
+                                    </div>
+                                    <div class="col-md-3 ">Math
+                                        <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.currentMath}}" name="currentMath">
+                                    </div>
+                                    <div class="col-md-3 ">Science
+                                        <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.currentScience}}" name="currentScience">
+                                    </div>
+                                    <div class="col-md-3 ">History
+                                        <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.currentHistory }}" name="currentHistory">
+                                    </div>
+                                </div>
+                        </p>
+                        </div>
+                    </label>
+                    <label class="lead font-weight-bold" style="text-indent:15px">
+                        4.Standardized Test Score
+                    </label>
+                    <p style="text-indent:10px" class="font-weight-bold ml-5">NJ ASK, Terra Nova: </p>
+                    <div class="row">
+                        <div class="col-md-3  ml-auto">Reading
+                            <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.njaskReading}}" name="njaskReading">
+                        </div>
+                        <div class="col-md-3 ">Writing
+                            <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.njaskWriting}}" name="njaskWriting">
+                        </div>
+                        <div class="col-md-3 ">Math
+                            <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.njaskMath}}" name="njaskMath">
+                        </div>
+                    </div>
+                    <p style="text-indent:10px" class="font-weight-bold ml-5">PSAT/SAT I:C.</p>
+                    <div class="m-4">
+                        <div class="row">
+                            <div class="col-md-3">Reading
+                                <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.satReading}}" name="satReading">
+                            </div>
+                            <div class="col-md-3 ">Writing
+                                <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.satWriting}}" name="satWriting">
+                            </div>
+                            <div class="col-md-3 ">Math
+                                <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.satMath}}" name="satMath">
+                            </div>
+                            <div class="col-md-3 ">SAT II
+                                <input type="text" class="border-bottom noborder text-center" style="border:none" value="{{student.satSATII}}" name="satSATII">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mx-auto pt-3">
+            <h4 class="text-info text-center">Official Use Only</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="p-2 border h-100">
+                    <div class="mx-auto">
+                        <h5 class="text-center text-info pt-3">Courses to register</h5>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Main</p>
+                                <select class="form-control" name="course">
+                                    <option></option>
+                                    <option>SAT Fall</option>
+                                    <option>ACT Fall</option>
+                                    <option>SSAT - Lo</option>
+                                    <option>SSAT - Me</option>
+                                    <option>SSAT - Up</option>
+                                    <option>SCAT</option>
+                                    <option>PSAT</option>
+                                    <option>Private</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <p class="text-center">English</p>
+                                <select class="form-control" name="course">
+                                    <option></option>
+                                    <option>English 1st Grade</option>
+                                    <option>English 2nd Grade</option>
+                                    <option>English 3rd Grade</option>
+                                    <option>English 4th Grade</option>
+                                    <option>English 5th Grade</option>
+                                    <option>English 6th Grade</option>
+                                    <option>English 7th Grade</option>
+                                    <option>English 8th Grade</option>
+                                    <option>Success English</option>
+                                    <option>PSAT English</option>
+                                    <option>Power Writing</option>
+                                    <option>ESL</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Math</p>
+                                <select class="form-control" name="course">
+                                    <option></option>
+                                    <option>Math 1st Grade</option>
+                                    <option>Math 2nd Grade</option>
+                                    <option>Math 3rd Grade</option>
+                                    <option>Math 4th Grade</option>
+                                    <option>Math 5th Grade</option>
+                                    <option>Math 6th Grade</option>
+                                    <option>Pre-Algebra</option>
+                                    <option>Algebra 1</option>
+                                    <option>Geometry</option>
+                                    <option>Algebra II</option>
+                                    <option>Pre-Calculus</option>
+                                    <option>Calculus</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <p class="text-center">Science</p>
+                                <select class="form-control" name="course">
+                                    <option></option>
+                                    <option>Biology</option>
+                                    <option>Chemistry</option>
+                                    <option>Physics</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">SAT II</p>
+                                <select class="form-control" name="course">
+                                    <option></option>
+                                    <option>English 1st Grade</option>
+                                    <option>English 2nd Grade</option>
+                                    <option>English 3rd Grade</option>
+                                    <option>English 4th Grade</option>
+                                    <option>English 5th Grade</option>
+                                    <option>English 6th Grade</option>
+                                    <option>English 7th Grade</option>
+                                    <option>English 8th Grade</option>
+                                    <option>English 9th Grade</option>
+                                    <option>English 10th Grade</option>
+                                    <option>English 11th Grade</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <p class="text-center">PM</p>
+                                <select class="form-control" name="course">
+                                    <option></option>
+                                    <option>Math 1st Grade PM</option>
+                                    <option>Math 2nd Grade PM</option>
+                                    <option>Math 3rd Grade PM</option>
+                                    <option>Math 4th Grade PM</option>
+                                    <option>Math 5th Grade PM</option>
+                                    <option>Math 6th Grade PM</option>
+                                    <option>Pre-Algebra PM</option>
+                                    <option>Algebra I PM</option>
+                                    <option>Geometry PM</option>
+                                    <option>Algebra II PM</option>
+                                    <option>Pre-Calculus PM</option>
+                                    <option>Calculus PM</option>
+                                    <option>English 1st Grade PM</option>
+                                    <option>English 2nd Grade PM</option>
+                                    <option>English 3rd Grade PM</option>
+                                    <option>English 4th Grade PM</option>
+                                    <option>English 5th Grade PM</option>
+                                    <option>English 6th Grade PM</option>
+                                    <option>English 7th Grade PM</option>
+                                    <option>English 8th Grade PM</option>
+                                    <option>Success English PM</option>
+                                    <option>PSAT English PM</option>
+                                    <option>Power Writing PM</option>
+                                    <option>Biology PM</option>
+                                    <option>Chemistry PM</option>
+                                    <option>Physics PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <p class="text-center">Tutor</p>
+                                <select class="form-control" name="course">
+                                    <option></option>
+                                    <option>Biology</option>
+                                    <option>Chemistry</option>
+                                    <option>Physics</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-12">
+                                <p class="text-center">Current</p>
+                                <select class="form-control" name="course">
+                                    <option>{{{adjustCourse student.course}}}</option>
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-2 border h-100">
+                    <div class="mx-auto">
+                        <h5 class="text-center text-info pt-3">Tutoring information</h5>
+                        <p class="ml-2">Subject for Tutoring
+                            <input type="text" class="ml-2 border-bottom noborder text-center" style="border:none" value="{{student.subForTutor}}" name="subForTutor">
+                        </p>
+                        <p class="ml-2">How many tutoring sessions each week?
+                            <input type="text" class="ml-2 border-bottom noborder text-center" style="border:none" name="numSession" value="{{student.numSession}}">
+                        </p>
+                        <p class="ml-2">How many hours per session
+                            <input type="text" class="ml-2 border-bottom noborder text-center" style="border:none" name="numHour" value="{{student.numHour}}">
+                        </p>
+                        <p class="ml-2">Date & Time Available: </p>
+                        <div class="row h-100">
+                            <div class="col">
+                                <p>Time.
+                                    <input type="text" class="ml-2 border-bottom noborder text-center" style="border:none" name="tutorTime" class="form-control"
+                                        value="{{student.tutorTime}}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-auto mt-3">
+                <h4 class="text-center text-info mb-0">Note</h4>
+            </div>
+            <textarea name="note" id="" cols="30" rows="10" class="form-control m-3">{{student.note}}</textarea>
+            <button type="submit" class="btn btn-outline-success btn-lg mx-auto mt-4 px-5">Edit</button>
+    </form>
+    </div>

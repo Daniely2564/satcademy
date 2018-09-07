@@ -1,0 +1,225 @@
+<script>
+    function mouseon(table) {
+        table.classList.add('bg-light');
+    }
+    function mouseout(table) {
+        table.classList.remove('bg-light');
+    }
+</script>
+<main role="main" class="mx-4">
+    <div class="starter-template">
+        <h1 class="p-3">Search Students</h1>
+        {{#if message}}
+        <div class="alert alert-success">{{message}}</div>
+        {{/if}} {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+        {{/if}}
+        <form method="POST">
+            <div class="form-row align-items-center form-inline text-center">
+                <div class="mx-auto">
+                    <label class="d-inline">Find By </label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="searchOption">
+                        <option selected>Choose...</option>
+                        <option>Student Name</option>
+                        <option>Grade</option>
+                        <option>Course</option>
+                        <option>Parent Name</option>
+                        <option>Student Phone</option>
+                        <option>Parent Phone</option>
+                        <option>Parent Email</option>
+                    </select>
+                    <input type="text" name="searchValue" class="m-2 form-control">
+                    <button type="submit" class="btn btn-primary">Find</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table class="table text-center" style="overflow-y:scroll,height:100px,display:block" id="table">
+        <col width="50">
+        <col width="100">
+        <thead>
+            <tr class="bg-dark">
+                <th class="text-white" style="width: 5%">No.</th>
+                <th class="text-white" style="width: 10%">Name</th>
+                <th class="text-white" style="width: 5%">Grade</th>
+                <th class="text-white" style="width: 30%">Course</th>
+                <th class="text-white" style="width: 30%">Week</th>
+                <th class="text-white" style="width: 5%">W</th>
+                <th class="text-white" style="width: 7%">Start Date</th>
+                <th class="text-white" style="width: 7%">End Date</th>
+            </tr>
+            {{#each student}}
+            <tr onmouseover="mouseon(this)" onmouseout="mouseout(this)">
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{this.no}}</a>
+                </td>
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{this.name}}</a>
+                </td>
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{this.grade}}</a>
+                </td>
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{adjustCourse this.course}}</a>
+                </td>
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{{adjustWeek this.week}}}</a>
+                </td>
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{totalWeek this.week}}</a>
+                </td>
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{this.startDate}}</a>
+                </td>
+                <td>
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{this.endDate}}</a>
+                </td>
+                <td style="display:none">
+                    <a class="text-dark" style="text-decoration:none" href="/student/{{this.id}}">{{this.note}}</a>
+                </td>
+            </tr>
+            {{/each}}
+        </thead>
+    </table>
+
+</main>
+<div class="p-5">
+    <a href="/register/student" class="btn btn-outline-primary mr-3 float-right">Register</a>
+    <div class="btn btn-outline-success mr-3" id="save" style="float:right">Export To Excel File</div>
+</div>
+
+<script src="/js/shim.min.js"></script>
+<script src="/js/xlsx.full.min.js"></script>
+<script src="/js/filesaver.js"></script>
+<script>
+    let tableRows = document.getElementById('table').childNodes[2].childNodes;
+    let wb = XLSX.utils.book_new();
+
+    wb.props = {
+        Title: 'Student database to excel',
+        Subject: 'Student file',
+        Author: 'Daniel',
+        CreatedDate: new Date()
+    }
+    wb.SheetNames.push("Student info");
+    let ws_data = [
+        [],
+        ['', 'No', 'Name', 'Gr', 'Eng', 'Math', 'SP', 'Note', 'Name', 'Grade', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'W', 'Begin', 'End', '1st', '2nd', '3rd', '4th', '5th'],
+    ];
+    for (let i = 3; i < tableRows.length; i += 2) {
+        let MATH = '';
+        let ENG = '';
+        let SAT = '';
+        const courses = tableRows[i].childNodes[7].childNodes[0].text.split("/");
+        if (courses.includes("Math 1st Grade")) {
+            MATH = "01MAT";
+        } else if (courses.includes("Math 2nd Grade")) {
+            MATH = "02MAT";
+        } else if (courses.includes("Math 3rd Grade")) {
+            MATH = "03MAT";
+        } else if (courses.includes("Math 4th Grade")) {
+            MATH = "04MAT";
+        } else if (courses.includes("Math 5th Grade")) {
+            MATH = "05MAT";
+        } else if (courses.includes("Math 6th Grade")) {
+            MATH = "06MAT";
+        } else if (courses.includes("Pre-Algebra")) {
+            MATH = "07PAL";
+        } else if (courses.includes("Algebra I")) {
+            MATH = "08AL1";
+        } else if (courses.includes("Geometry")) {
+            MATH = "09GEO";
+        } else if (courses.includes("Algebra II")) {
+            MATH = "10AL2";
+        } else if (courses.includes("Pre-Calculus")) {
+            MATH = "11PCA";
+        } else if (courses.includes("Calculus")) {
+            MATH = "12CAL";
+        }
+
+        if (courses.includes("English 1st Grade")) {
+            ENG = "01ENG";
+        } else if (courses.includes("English 2nd Grade")) {
+            ENG = "02ENG";
+        } else if (courses.includes("English 3rd Grade")) {
+            ENG = "03ENG";
+        } else if (courses.includes("English 4th Grade")) {
+            ENG = "04ENG";
+        } else if (courses.includes("English 5th Grade")) {
+            ENG = "05ENG";
+        } else if (courses.includes("English 6th Grade")) {
+            ENG = "06ENG";
+        } else if (courses.includes("English 7th Grade")) {
+            ENG = "07ENG";
+        } else if (courses.includes("English 8th Grade")) {
+            ENG = "08ENG";
+        } else if (courses.includes("Success English")) {
+            ENG = "09SCE";
+        } else if (courses.includes("PSAT English")) {
+            ENG = "10PEN";
+        } else if (courses.includes("Power Writing")) {
+            ENG = "11PWR";
+        } else if (courses.includes("ESL")) {
+            ENG = "ESL";
+        }
+
+        if (courses.includes("SAT Summer")) {
+            SAT = "SOS";
+        } else if (courses.includes("PSAT")) {
+            SAT = "PSAT";
+        } else if (courses.includes("ACT Summer")) {
+            SAT = "ACT";
+        } else if (courses.includes("SSAT - Lo") || courses.includes("SSAT - Me") || courses.includes("SSAT - Up")) {
+            SAT = "SSAT";
+        }
+
+        if (courses.includes("Biology")) {
+            SAT += ",BIO01";
+        } else if (courses.includes("Chemistry")) {
+            SAT += ",CHEM01";
+        } else if (courses.includes("Physics")) {
+            SAT += ",PHY01"
+        }
+
+
+        ws_data.push([
+            '',
+            tableRows[i].childNodes[1].childNodes[0].text,  //no
+            tableRows[i].childNodes[3].childNodes[0].text,  //Name
+            tableRows[i].childNodes[5].childNodes[0].text, //Grade
+            ENG,  //ENG
+            MATH,  //Math
+            SAT,  //SP
+            tableRows[i].childNodes[17].childNodes[0].text, //Note
+            tableRows[i].childNodes[3].childNodes[0].text, //Name
+            tableRows[i].childNodes[5].childNodes[0].text, //Grade
+            `${tableRows[i].childNodes[9].childNodes[0].text[0] === 'O' ? '1' : ''}`, //1
+            `${tableRows[i].childNodes[9].childNodes[0].text[1] === 'O' ? '2' : ''}`, //2
+            `${tableRows[i].childNodes[9].childNodes[0].text[2] === 'O' ? '3' : ''}`, //3
+            `${tableRows[i].childNodes[9].childNodes[0].text[3] === 'O' ? '4' : ''}`, //4
+            `${tableRows[i].childNodes[9].childNodes[0].text[4] === 'O' ? '5' : ''}`, //5
+            `${tableRows[i].childNodes[9].childNodes[0].text[5] === 'O' ? '6' : ''}`, //6
+            `${tableRows[i].childNodes[9].childNodes[0].text[6] === 'O' ? '7' : ''}`, //7
+            `${tableRows[i].childNodes[9].childNodes[0].text[7] === 'O' ? '8' : ''}`, //8
+            `${tableRows[i].childNodes[9].childNodes[0].text[8] === 'O' ? '9' : ''}`, //9
+            tableRows[i].childNodes[11].childNodes[0].text, //Total Week
+            tableRows[i].childNodes[13].childNodes[0].text, //Begin
+            tableRows[i].childNodes[15].childNodes[0].text  //end
+
+        ])
+    }
+    let ws = XLSX.utils.aoa_to_sheet(ws_data);
+    wb.Sheets["Student info"] = ws;
+
+    let wbout = XLSX.write(wb, { booktype: 'xlsx', type: 'binary' });
+    function s2ab(s) {
+        let buf = new ArrayBuffer(s.length);
+        let view = new Uint8Array(buf);
+        for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
+    }
+    document.getElementById('save').addEventListener('click', () => {
+        saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), "student.xlsx");
+    });
+
+</script>

@@ -1,0 +1,134 @@
+<div class="container">
+    <div class="mt-5">
+        <div class="mt-5">
+            <h1 class="text-center">{{{h1}}}</h1>
+        </div>
+        <table id="data" class="table" style="display:none">
+            {{#each student}}
+            <tr>
+                <td>{{this.no}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.parentEmail}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{this.parentPhone}}</td>
+                <td>{{this.parentPhone2}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.grade}}</td>
+                <td>{{adjustCourse this.course}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="text-center">
+        <div class="btn btn-outline-success mt-5" id="save">Export to Excel File</div>
+    </div>
+</div>
+<script src="/js/shim.min.js"></script>
+<script src="/js/xlsx.full.min.js"></script>
+<script src="/js/filesaver.js"></script>
+<script>
+    const table = document.getElementById('data').childNodes[1].childNodes;
+    let wb = XLSX.utils.book_new();
+
+    wb.props = {
+        Title: 'Student database to excel',
+        Subject: 'Contact Info',
+        Author: 'Daniel',
+        CreatedDate: new Date()
+    }
+    wb.SheetNames.push("Contact Info");
+    let ws_data = [
+        [''],
+        ['', 'No', 'Name', 'Email Parent1', 'Email Parent2', 'Email Student', 'Student Phone', 'Parent Phone', 'Parent Phone2', 'Name', 'Gr', 'Eng', 'Math', 'SP'],
+
+    ];
+    for (let i = 0; i < table.length; i += 2) {
+        let MATH = '';
+        let ENG = '';
+        let courses = table[2].childNodes[19].textContent.split("/");
+        console.log(courses);
+        if (courses.includes("Math 1st Grade")) {
+            MATH = "01MAT";
+        } else if (courses.includes("Math 2nd Grade")) {
+            MATH = "02MAT";
+        } else if (courses.includes("Math 3rd Grade")) {
+            MATH = "03MAT";
+        } else if (courses.includes("Math 4th Grade")) {
+            MATH = "04MAT";
+        } else if (courses.includes("Math 5th Grade")) {
+            MATH = "05MAT";
+        } else if (courses.includes("Math 6th Grade")) {
+            MATH = "06MAT";
+        } else if (courses.includes("Pre-Algebra")) {
+            MATH = "07PAL";
+        } else if (courses.includes("Algebra I")) {
+            MATH = "08AL1";
+        } else if (courses.includes("Geometry")) {
+            MATH = "09GEO";
+        } else if (courses.includes("Algebra II")) {
+            MATH = "10AL2";
+        } else if (courses.includes("Pre-Calculus")) {
+            MATH = "11PCA";
+        } else if (courses.includes("Calculus")) {
+            MATH = "12CAL";
+        }
+
+        if (courses.includes("English 1st Grade")) {
+            ENG = "01ENG";
+        } else if (courses.includes("English 2nd Grade")) {
+            ENG = "02ENG";
+        } else if (courses.includes("English 3rd Grade")) {
+            ENG = "03ENG";
+        } else if (courses.includes("English 4th Grade")) {
+            ENG = "04ENG";
+        } else if (courses.includes("English 5th Grade")) {
+            ENG = "05ENG";
+        } else if (courses.includes("English 6th Grade")) {
+            ENG = "06ENG";
+        } else if (courses.includes("English 7th Grade")) {
+            ENG = "07ENG";
+        } else if (courses.includes("English 8th Grade")) {
+            ENG = "08ENG";
+        } else if (courses.includes("Success English")) {
+            ENG = "09SCE";
+        } else if (courses.includes("PSAT English")) {
+            ENG = "10PEN";
+        } else if (courses.includes("Power Writing")) {
+            ENG = "11PWR";
+        }
+
+
+        ws_data.push([
+            '',
+            table[i].childNodes[1].textContent,  //no
+            table[i].childNodes[3].textContent,  //Name
+            table[i].childNodes[5].textContent, //Parent email
+            '',  //ENG
+            table[i].childNodes[7].textContent,  //Studnet Email
+            table[i].childNodes[9].textContent,  //Student Phone
+            table[i].childNodes[11].textContent, //Parent Phone
+            table[i].childNodes[13].textContent, //Parent Phone 2
+            table[i].childNodes[15].textContent, //Name
+            table[i].childNodes[17].textContent, // Grade
+            ENG,       //English
+            MATH,      //Math
+            ''
+
+        ])
+    }
+    let ws = XLSX.utils.aoa_to_sheet(ws_data);
+    wb.Sheets["Contact Info"] = ws;
+
+    let wbout = XLSX.write(wb, { booktype: 'xlsx', type: 'binary' });
+    function s2ab(s) {
+        let buf = new ArrayBuffer(s.length);
+        let view = new Uint8Array(buf);
+        for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
+    }
+    document.getElementById('save').addEventListener('click', () => {
+        saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), "Studnet-Contact.xlsx");
+    });
+
+</script>

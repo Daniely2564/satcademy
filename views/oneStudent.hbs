@@ -1,0 +1,332 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<div class="container">
+    <h1 class="text-center mt-5">Student Profile</h1>
+    <p class="lead text-center">View {{student.name}}'s Profile</p>
+    <input type="hidden" name="id" value="{{student._id}}"> {{#if message}}
+    <div class="alert alert-success">{{message}}</div>
+    {{/if}}
+    <div class="border border-primary bg-primary p-3">
+        <h1 class="text-center mt-5 b">SATCADEMY
+            <br>STUDENT INFORMATION FORM</h1>
+        <p class="lead text-center text-light">You can register a student.</p>
+    </div>
+    {{!-- First row --}}
+    <div class="row">
+        {{!-- first column --}}
+        <div class="col-md-6 col-lg-6">
+            <div class="mt-2 border h-100">
+                <h4 class="text-info text-center mt-2">Student Information</h4>
+                <div class="form-group row mt-5 mb-0">
+                    <label for="name" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Name:</p>
+                    </label>
+                    <p class="lead">{{student.name}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="birthday" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Birthday:</p>
+                    </label>
+                    <p class="lead">{{student.birthday}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="address" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Address:</p>
+                    </label>
+                    <p class="lead">{{student.address}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="email" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Email:</p>
+                    </label>
+                    <p class="lead">{{student.email}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="homephone" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Home Tel:</p>
+                    </label>
+                    <p class="lead">{{student.homephone}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="phone" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Cellular:</p>
+                    </label>
+                    <p class="lead">{{student.phone}}</p>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <label for="enrolled" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Enrolled:</p>
+                    </label>
+                    <p class="lead">{{student.enrolledDate}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="startDate" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Start D:</p>
+                    </label>
+                    <p class="lead">{{student.startDate}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="endDate" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">End D:</p>
+                    </label>
+                    <p class="lead">{{student.endDate}}</p>
+                </div>
+                <div class="ml-5 row">
+                    <label for="week" class="lead font-weight-bold">Weeks : </label>
+                    <p class="lead">&nbsp;{{student.week}}</p>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Second column --}}
+        <div class="col-md-6 col-lg-6">
+            <div class="mt-2 border">
+                <h4 class="text-info text-center mt-2">Parent Information</h4>
+                <div class="form-group row mt-5 mb-0">
+                    <label for="parentName" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Name:</p>
+                    </label>
+                    <p class="lead">{{student.parentName}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="parentEmail" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Email:</p>
+                    </label>
+                    <p class="lead">{{student.parentEmail}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="parentCellular" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Cellular:</p>
+                    </label>
+                    <p class="lead">{{student.parentPhone}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="officeTel" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Office Tel:</p>
+                    </label>
+                    <p class="lead">{{student.parentOfficeTel}}</p>
+                </div>
+                <div class="form-group row mb-0">
+                    <label class="col-md-12 text-center font-weight-bold">
+                        <h5 class="text-danger">Emergency Contact</h5>
+                    </label>
+                    <label for="emergencyName" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Name:</p>
+                    </label>
+                    <span class="lead">{{student.emergencyName}}</span>
+                    <label for="emergencyPhone" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Phone:</p>
+                    </label>
+                    <p class="lead">{{student.emergencyPhone}}</p>
+                </div>
+            </div>
+            <div class="mt-2 border">
+                <h5 class="text-center text-info">How did you hear about SATCADEMY</h5>
+                <div class="text-center">
+                    <span class="lead">
+                        {{#if student.getToKnow}} {{#each student.getToKnow}} {{this}} {{/each}} {{else}} None {{/if}}
+                    </span>
+                </div>
+                <div class="row">
+                    <label for="referralName" class="col-md-3">
+                        <p class="lead font-weight-bold text-right">Referral By</p>
+                    </label>
+                    <p class="lead">
+                        {{#if student.referralName}} {{student.referralName}} {{else}} No One {{/if}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {{!-- Second row --}}
+        <div class="col-md-12 col-lg-12">
+            <div class="border mt-3">
+                <h4 class="text-center text-info mt-2">Academic Information</h4>
+                <br>
+                <label for="schoolName">
+                    <p class="lead font-weight-bold text-right" style="text-indent:15px">1. Current school name:
+                        <span class="font-weight-normal">{{student.school}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="w-25">Grade:
+                            <span class="font-weight-normal">&nbsp;{{student.grade}}</span>
+                        </span>
+                    </p>
+                </label>
+                <br>
+                <label for="schoolName">
+                    <p class="lead font-weight-bold text-right" style="text-indent:15px">2. How long in the USA?
+                        <span class="font-weight-normal">{{student.yearsInUSA}}</span> &nbsp;Years</p>
+                </label>
+                <label class="w-100">
+                    <p class="lead font-weight-bold" style="text-indent:15px">3. List of Current Subjects
+                        <div class="ml-4">
+                            <div class="row">
+                                <div class="col-md-3 ">English
+                                    <p class="text-center">{{student.currentEnglish}}</p>
+                                </div>
+                                <div class="col-md-3 ">Math
+                                    <p class="text-center">{{student.currentMath}}</p>
+                                </div>
+                                <div class="col-md-3 ">Science
+                                    <p class="text-center">{{student.currentScience}}</p>
+                                </div>
+                                <div class="col-md-3 ">History
+                                    <p class="text-center">{{student.currentHistory}}</p>
+                                </div>
+                            </div>
+                    </p>
+                    </div>
+                </label>
+                <label class="lead font-weight-bold" style="text-indent:15px">
+                    4.Standardized Test Score
+                </label>
+                <p style="text-indent:10px" class="font-weight-bold ml-5">NJ ASK, Terra Nova: </p>
+                <div class="row">
+                    <div class="col-md-3  ml-auto">Reading &nbsp;{{student.njaskReading}}</div>
+                    <div class="col-md-3 ">Writing &nbsp;{{student.njaskWriting}}</div>
+                    <div class="col-md-3 ">Math &nbsp;{{student.njaskMath}}</div>
+                </div>
+                <p style="text-indent:10px" class="font-weight-bold ml-5">PSAT/SAT I:C.</p>
+                <div class="m-4">
+                    <div class="row">
+                        <div class="col-md-3">Reading &nbsp;{{student.satReading}}</div>
+                        <div class="col-md-3 ">Writing &nbsp;{{student.satWriting}}</div>
+                        <div class="col-md-3 ">Math &nbsp;{{student.satMath}}</div>
+                        <div class="col-md-3 ">SAT II &nbsp;{{student.satSATII}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mx-auto pt-3">
+        <h4 class="text-info text-center">Official Use Only</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="p-2 border h-100">
+                <div class="mx-auto">
+                    <div class="row">
+                        <br>
+                        <div class="col">
+                            <h1 class="text-center">Current Subjects</h1>
+                            <br>
+                            <div class="text-center">{{{adjustCourse2 student.course}}}</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="p-2 border h-100">
+                <div class="mx-auto">
+                    <h5 class="text-center text-info pt-3">Tutoring information</h5>
+                    <p class="ml-2">Subject for Tutoring {{student.subForTutor}}</p>
+                    <p class="ml-2">How many tutoring sessions each week? &nbsp;
+                        <span class="font-weight-bold">{{student.numSession}}</span>
+                    </p>
+                    <p class="ml-2">How many hours per session &nbsp;
+                        <span class="font-weight-bold">{{student.numHour}}</span>
+                    </p>
+                    <p class="ml-2">Date & Time Available: </p>
+                    <div class="row h-100">
+                        <div class="text-center mx-auto">
+                            {{student.tutorTime}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mx-auto mt-3">
+            <h4 class="text-center text-info mb-0">Note</h4>
+        </div>
+        <div class="w-100 m-3 p-3 border">{{student.note}}</div>
+    </div>
+    <div style="width:95%;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="text-right mb-5">
+        <a href="/delete/{{student._id}}" class="float-left" style="text-decoration:none">
+            <button type="submit" class="btn btn-danger px-4">Delete</button>
+        </a>
+        <a href="/grading/student/{{student._id}}" class="btn btn-outline-success">Grade SAT</a>
+        <a href="/edit/{{student._id}}" style="text-decoration:none">
+            <button type="submit" class="btn btn-outline-primary px-4">Edit</button>
+        </a>
+
+    </div>
+    <div style="display:none" id="studentName">{{student.name}}</div>
+</div>
+
+{{{satScores student.sat}}}
+
+<script>
+    window.onload = function () {
+        let myChart = document.getElementById('myChart').getContext('2d');
+        let total = document.getElementById('total').innerHTML;
+        let date = [];
+        let reading = [];
+        let writing = [];
+        let math = [];
+        let studentName = document.getElementById('studentName').innerHTML;
+        Chart.defaults.global.defaultFontSize = 14;
+        for (let i = 0; i < total; i++) {
+            date.push([document.getElementById(`grade-${i}-type`).innerHTML, document.getElementById(`grade-${i}-test`).innerHTML]);
+            reading.push(document.getElementById(`grade-${i}-reading`).innerHTML);
+            writing.push(document.getElementById(`grade-${i}-writing`).innerHTML);
+            math.push(document.getElementById(`grade-${i}-math`).innerHTML);
+        }
+        console.log(total);
+        let myLineChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: date,
+                fill: false,
+                datasets: [{
+                    label: 'Reading',
+                    data: reading,
+                    fill: false,
+                    borderColor: 'red'
+                }, {
+                    label: 'Writing',
+                    data: writing,
+                    fill: false,
+                    borderColor: 'blue'
+                }, {
+                    label: 'Math',
+                    data: math,
+                    fill: false,
+                    borderColor: 'green'
+                }]
+
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: ['SAT Score', `Name: ${studentName}`],
+                    fontSize: 25
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        fontColor: '#000',
+                        fontSize: 17
+                    }
+                },
+                tooltips: {
+                    enable: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 100
+                        }
+                    }]
+                }
+            }
+        })
+    }
+</script> {{{satRecords student}}}
+<br>
+<br>
